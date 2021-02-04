@@ -15,26 +15,10 @@ class PurchaseSeeder extends Seeder
     public function run()
     {
         DB::table('purchases')->insert([
-            [
-                'no' => '31/PO/012020',
-                'total' => '990000',
-                // 'status' => 'utang',
-                // 'created_at' => date('Y-m-d H:i:s'),
-                // 'updated_at' => date('Y-m-d H:i:s'),
-                // 'category' => 1,
-                // 'suplier' => 1,
-                'unit_total' => 1,
-            ],
-            [
-                'no' => '12/PO/022020',
-                'total' => '400000',
-                // 'status' => 'piutang',
-                // 'created_at' => date('Y-m-d H:i:s'),
-                // 'updated_at' => date('Y-m-d H:i:s'),
-                // 'category' => 1,
-                // 'suplier' => 1,
-                'unit_total' => 1,
-            ],
+            'no' => '28/PO/022020',
+            'total' => '1945041',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
         ]);
     }
 }

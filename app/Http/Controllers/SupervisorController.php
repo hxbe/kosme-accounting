@@ -3,58 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Models\AccountPayable;
-use App\Models\BankAccount;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Invoice;
+use App\Models\Item;
+use App\Models\Purchase;
+use App\Models\PurchaseItem;
 use App\Models\Suplier;
+use App\Models\Termin;
 use Illuminate\Http\Request;
 
-class SupervisorController extends Controller{
-    public function accountpayable($name = NULL, $category = NULL, $ap = NULL){
-        if(!is_null($name)){
-            if(!is_null($category)){
-                if(!is_null($ap)){
-                    $data['company'] = Company::where('abbr', $name)->first();
-                    $data['ap'] = AccountPayable::where(['id' => $ap, 'visible' => 1])->with(['invoice', 'purchase', 'suplier', 'payment', 'category'])->get();
-                    if(!is_null($data['ap'])){
-                        // echo json_encode($data['ap']);
-                        return view('Supervisor.detailaccountpayable',['data' => $data]);
-                    }else{
-                        // error not found
-                    }
-                }else{
-                    $data['company'] = Company::where('abbr', $name)->first();
-                    $data['category'] = Category::whereRaw('LOWER(name) = "'.str_replace('-',' ', $category).'"')->first();
-                    $data['ap'] = AccountPayable::where(['category' => $data['category']->id, 'visible' => 1])->with(['invoice', 'purchase', 'suplier', 'payment', 'category'])->get();
-                    return view('Supervisor.accountpayable',['data' => $data]);
-                }
-            }else{
-                $data['company'] = Company::where('abbr', $name)->first();
-                $data['category'] = Category::get();
-                return view('Supervisor.category',['data' => $data]);
-            }
-            // echo json_encode($company);
-        }else{
-            $data = Company::get();
-            return view('Supervisor.company',['data' => $data]);
+class SupervisorController extends Controller
+{
+    public function company(){
+        $data = Company::get();
+        return view('supervisor.company',['data' => $data]);
+    }
+
+    public function category(){
+        $data = Category::get();
+        return view('supervisor.category',['data' => $data]);
+    }
+
+    public function list($company = NULL, $category = NULL){
+        if(!is_null($company) && !is_null($category)){
+            $data['company'] = Company::where('abbr', $company)->first();
+            $data['category'] = Category::whereRaw('LOWER(name) = "'.str_replace('-',' ', $category).'"')->first();
+            $data['ap'] = AccountPayable::where(['company' => $data['company']->id, 'category' => $data['category']->id, 'visible' => 1])->with(['purchase', 'invoice', 'category', 'suplier', 'company'])->get();
+            return view('supervisor.aplist',['data' => $data]);
         }
     }
 
-    public function addaccountpayable(Request $req, $name = NULL, $category = NULL){
-        if(!is_null($name) && !is_null($category)){
-            if(!is_null($req)){
-                $data['company'] = Company::where('abbr', $name)->first();
-                $data['category'] = Category::whereRaw('LOWER(name) = "'.str_replace('-',' ', $category).'"')->first();
-                $data['ap'] = AccountPayable::where(['category' => $data['category']->id, 'visible' => 1])->with(['invoice', 'purchase', 'suplier', 'payment', 'category'])->get();
-                $data['suplier'] = Suplier::get();
-                $data['bank_account'] = BankAccount::with('bank')->get();
-                return view('Supervisor.addaccountpayable',['data' => $data]);
-            }else{
-                $data['company'] = Company::where('abbr', $name)->first();
-                var_dump($data);
-            }
-        }else{
-            // error
-        }
+    public function add($company = NULL, $category = NULL){
+
+    }
+
+    public function tes(){
+        // $data = Invoice::with('termin')->get();
+        $data = Suplier::with(['item'])->get();
+        echo json_encode($data);
     }
 }

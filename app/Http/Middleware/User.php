@@ -17,16 +17,18 @@ class User
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check()) {
-            if(request()->segment(1) != ''){
-                return redirect('/')->with('error', ['title' => 'Akses Terbatas', 'body' => 'Silahkan login untuk melanjutkan']);
-            }
-        }else{
-            if(request()->segment(1) != Auth::user()->role){
-                if($request->session()->exists('message')){
-                    return redirect('/'.Auth::user()->role.'/account-payable')->with('message', $request->session()->get('message'));
-                }else{
-                    return redirect('/'.Auth::user()->role.'/account-payable');
+        if(request()->segment(1) != 'api'){
+            if (!Auth::check()) {
+                if(request()->segment(1) != ''){
+                    return redirect('/')->with('error', ['title' => 'Akses Terbatas', 'body' => 'Silahkan login untuk melanjutkan']);
+                }
+            }else{
+                if(request()->segment(1) != Auth::user()->role){
+                    if($request->session()->exists('message')){
+                        return redirect('/'.Auth::user()->role.'/accountpayable')->with('message', $request->session()->get('message'));
+                    }else{
+                        return redirect('/'.Auth::user()->role.'/accountpayable');
+                    }
                 }
             }
         }

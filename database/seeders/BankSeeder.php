@@ -15,16 +15,14 @@ class BankSeeder extends Seeder
     public function run()
     {
         DB::table('banks')->insert([
-            [
-                'name' => 'Bank Central Asia',
-                'abbr' => 'BCA',
-                'logo' => 'app-assets/images/logo/bca.png',
-            ],
-            [
-                'name' => 'Bank Mandiri',
-                'abbr' => 'Mandiri',
-                'logo' => 'app-assets/images/logo/mandiri.png',
-            ],
+            'no' => '8161989789',
+            'name' => 'accounting kosme',
+            'bank' => 'bca',
+        ]);
+        DB::table('banks')->insert([
+            'no' => '1440595988889',
+            'name' => 'accounting kosme',
+            'bank' => 'mandiri',
         ]);
     }
 }

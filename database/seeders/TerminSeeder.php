@@ -15,16 +15,13 @@ class TerminSeeder extends Seeder
     public function run()
     {
         DB::table('termins')->insert([
-            [
-                'name' => 'N/30',
-                'value' => '900000',
-                'start' => date('Y-m-d H:i:s'),
-                'end' => '2021-3-1',
-                'status' => 1,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-                'invoice' => '1234',
-            ],
+            'name' => 'N/30',
+            'value' => '100000',
+            'start' => '2021-3-2',
+            'end' => '2021-4-2',
+            'status' => '0',
+            'keterangan' => '',
+            'invoice' => '9635',
         ]);
     }
 }

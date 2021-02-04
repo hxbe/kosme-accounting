@@ -15,22 +15,18 @@ class ItemSeeder extends Seeder
     public function run()
     {
         DB::table('items')->insert([
-            [
-                'name' => 'Sorbosil BFG-500',
-                'price' => '100000',
-                'unit_price' => 1,
-                'unit_item' => 3,
-                'suplier' => 1,
-                'category' => 1,
-            ],
-            [
-                'name' => 'ATL Sphere(B) White 2A (4BR',
-                'price' => '150000',
-                'unit_price' => 1,
-                'unit_item' => 3,
-                'suplier' => 1,
-                'category' => 1,
-            ],
+            'name' => 'Sorbosil BFG-500',
+            'suplier' => '1',
+            'category' => '1',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+        ]);
+        DB::table('items')->insert([
+            'name' => 'ATL Sphere(B) White 2A (4BR)',
+            'suplier' => '1',
+            'category' => '1',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
         ]);
     }
 }

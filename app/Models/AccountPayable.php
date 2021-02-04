@@ -9,68 +9,46 @@ class AccountPayable extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'type',
         'payment_status',
-        'created_at',
-        'updated_at',
         'visible',
+        'creted_at',
+        'updated_at',
         'invoice',
         'purchase',
         'deliver',
-        'payment',
         'category',
         'suplier',
+        'company',
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
         'id',
     ];
 
     public function invoice(){
-        return $this->hasMany(Invoice::class, 'no', 'invoice');
+        return $this->hasOne(Invoice::class, 'no', 'invoice')->with('termin');
     }
 
     public function purchase(){
-        return $this->hasMany(Purchase::class, 'no', 'purchase');
-    }
-
-    public function deliver(){
-        return $this->hasMany(Deliver::class, 'id', 'deliver');
-    }
-
-    public function payment(){
-        return $this->hasMany(Payment::class, 'id', 'payment');
+        return $this->hasOne(Purchase::class, 'no', 'purchase')->with('purchaseItem');
     }
 
     public function category(){
-        return $this->hasMany(Category::class, 'id', 'category');
+        return $this->hasOne(Category::class, 'id', 'category');
     }
 
     public function suplier(){
-        return $this->hasMany(Suplier::class, 'id', 'suplier');
+        return $this->hasOne(Suplier::class, 'id', 'suplier');
     }
 
-    public function termin(){
-        // return $this->belongsToMany(Termin::class, 'payments', 'termin', 'termin');
-        return $this->hasManyThrough(
-            Termin::class,
-            Invoice::class,
-            'no', // Foreign key on the environments table...
-            'invoice', // Foreign key on the deployments table...
-            'id', // Local key on the projects table...
-            'no' // Local key on the environments table...
-        );
-    }
-
-    public function purchase_detail(){
-        // return $this->hasManyThrough(
-        //     Purchase::class,
-        //     PurchaseDetail::class,
-        //     'purchase',
-        //     'purchase',
-        //     'id',
-        //     'id'
-        // );
-        // return $this->hasMany(PurchaseDetail::class, 'no', 'purchase');
+    public function company(){
+        return $this->hasOne(Company::class, 'id', 'company');
     }
 }

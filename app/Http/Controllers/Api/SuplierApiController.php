@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Models\Suplier;
+use Illuminate\Http\Request;
+
+class SuplierApiController extends Controller
+{
+    public function read(Request $request, $id = NULL){
+        if(!is_null($id)){
+            $data = Suplier::where('id', $id)->with(['item', 'category'])->get();
+        }else{
+            $data = Suplier::with(['item', 'category'])->get();
+        }
+
+        // $body = json_decode($request->getContent(), true);
+        // var_dump($body);
+
+        if(is_null($data)){
+            return $this->response(NULL, ['title' => 'Not Found', 'message' => 'Data not found in the table'], 404);
+        }else{
+            return $this->response(['suplier' => $data], NULL, 200);
+        }
+    }
+}

@@ -23,6 +23,6 @@ class Company extends Model
      * @var array
      */
     protected $hidden = [
-        'id',
+        // 'id',
     ];
 }

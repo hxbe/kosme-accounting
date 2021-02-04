@@ -8,20 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'id',
         'name',
-        'price',
-        'created_at',
-        'updated_at',
-
-        'unit_price',
-        'unit_item',
         'suplier',
         'category',
+        'created_at',
+        'updated_at',
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
-        'id',
+        // 'id',
     ];
+
+    public function category(){
+        return $this->belongsTo(Category::class, 'category', 'id');
+    }
+
+    public function suplier(){
+        return $this->belongsTo(Suplier::class, 'suplier', 'id');
+    }
 }

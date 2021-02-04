@@ -17,14 +17,14 @@ class CompanySeeder extends Seeder
         DB::table('companies')->insert([
             'name' => 'PT. Kosmetika Global Indonesia',
             'abbr' => 'kgi',
-            'logo' => 'app-assets/images/logo/kosme.png',
+            'logo' => 'images/logo/kosme.png',
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ]);
         DB::table('companies')->insert([
             'name' => 'CV. Kosmetika Global Pack',
             'abbr' => 'ksp',
-            'logo' => 'app-assets/images/logo/kosmepack.png',
+            'logo' => 'images/logo/kosmepack.png',
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ]);

@@ -13,14 +13,23 @@ class Invoice extends Model
         'no',
         'date',
         'due',
-        'status',
-        // 'created_at',
-        // 'updated_at',
-
-        // 'purchase',
+        'purchase',
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
-        'no',
+        // 'id',
     ];
+
+    public function purchase(){
+        return $this->belongsTo(Purchase::class, 'purchase', 'no');
+    }
+
+    public function termin(){
+        return $this->hasMany(Termin::class, 'invoice', 'no');
+    }
 }

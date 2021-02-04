@@ -14,16 +14,13 @@ class PaymentSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('payments')->insert([
-            [
-                'type' => 'transfer',
-                'date' => date('Y-m-d H:i:s'),
-                'value' => 900000,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-                'termin' => 1,
-                'bank_account' => '8161989789',
-            ],
+        DB::table('purchases')->insert([
+            'type' => '28/PO/022020',
+            'date' => '2021-3-20',
+            'value' => '1945041',
+            'bank' => '8161989789',
+            'accountpayable' => '1',
+            'termin' => '1',
         ]);
     }
 }

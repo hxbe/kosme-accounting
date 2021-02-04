@@ -8,14 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Bank extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'id',
+        'no',
         'name',
-        'abbr',
-        'logo',
+        'bank',
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
-        'id',
+        // 'no',
     ];
 }

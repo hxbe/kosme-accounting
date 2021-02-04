@@ -14,57 +14,25 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function __construct(){
+    // public function __construct(){
 
-    }
+    // }
 
-    public function mail($data = NULL){
+    public function response($data, $message, $code){
         if(!is_null($data)){
-            Mail::to($data['to'])->send(new Email($data));
+            $response['data'] = $data;
         }
+
+        if(!is_null($message)){
+            $response['message'] = $message;
+        }
+
+        return response()->json($response, $code);
     }
 
-    // public function validate_session(){
-    //     if(session()->has('user')){
-    //         if(request()->segment(1) != session('user')->role){
-    //             return redirect('/'.session('user')->role);
-    //         }else{
-    //             return redirect('/')->with('warning', ['title' => 'Account Deactivate', 'body' => 'please contact administrator']);
-    //         }
-    //     }else{
-    //         if(request()->segment(1) != ''){
-    //             return redirect('/')->with('success', ['title' => 'Account Deactivate', 'body' => 'please contact administrator']);
-    //         }
-    //     }
-    // }
-
-    // public function validate_account($data = NULL){
+    // public function mail($data = NULL){
     //     if(!is_null($data)){
-    //         switch ($data['status']) {
-    //             case 'active':
-    //                 session()->regenerate();
-    //                 session()->put('user', $data);
-    //                 return redirect('/'.$data['role'])->with('success', ['title' => 'Welcome Back', 'body' => 'Hello '.$data['firstname'].' '.$data['lastname']]);
-    //             break;
-
-    //             case 'deactivated':
-    //                 return redirect('/')->with('warning', ['title' => 'Account Deactivate', 'body' => 'please contact administrator']);
-    //             break;
-
-    //             case 'register':
-
-    //             break;
-
-    //             default:
-
-    //             break;
-    //         }
-    //     }
-    // }
-
-    // public function validate_role($role = NULL){
-    //     if(!is_null($role)){
-
+    //         Mail::to($data['to'])->send(new Email($data));
     //     }
     // }
 }

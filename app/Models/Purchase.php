@@ -11,15 +11,24 @@ class Purchase extends Model
     protected $fillable = [
         'no',
         'total',
-        // 'status',
-        // 'created_at',
-        // 'updated_at',
-        // 'category',
-        // 'suplier',
-        'unit_total',
+        'created_at',
+        'updated_at',
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
         'no',
     ];
+
+    public function invoice(){
+        return $this->hasMany(Invoice::class, 'purchase', 'no');
+    }
+
+    public function purchaseItem(){
+        return $this->hasMany(PurchaseItem::class, 'purchase', 'no')->with(['item']);
+    }
 }

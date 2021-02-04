@@ -15,9 +15,16 @@ class SuplierSeeder extends Seeder
     public function run()
     {
         DB::table('supliers')->insert([
-            [
-                'name' => 'PT. Maman Punya Indonesia',
-            ],
+            'name' => 'PT Maman Punya Indonesia',
+            'category' => '1',
+        ]);
+        DB::table('supliers')->insert([
+            'name' => 'PT Indonesia Punya Maman',
+            'category' => '1',
+        ]);
+        DB::table('supliers')->insert([
+            'name' => 'PT Maman Punya Semua',
+            'category' => '2',
         ]);
     }
 }

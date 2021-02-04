@@ -17,14 +17,19 @@ class Termin extends Model
         'end',
         'status',
         'keterangan',
-        'create_at',
-        'updated_at',
-
-        'unit_value',
         'invoice',
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
         'id',
     ];
+
+    public function invoice(){
+        return $this->belongsTo(Invoice::class, 'invoice', 'no');
+    }
 }
