@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;    
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -10,7 +10,7 @@ class CategoryApiController extends Controller
 {
     public function read(Request $request, $category = NULL){
         if(!is_null($category)){
-            $data = Category::whereRaw('LOWER(name) = "'.str_replace('-',' ', $category).'"')->first();
+            $data = Category::whereRaw('LOWER(name) = "'.str_replace('-', ' ', $category).'"')->first();
         }else{
             $data = Category::get();
         }

@@ -33,10 +33,10 @@ Route::group(['middleware' => ['user'], 'prefix' => 'supervisor'], function () {
     Route::get('/accountpayable', [SupervisorController::class, 'company'])->name('ap');
     Route::get('/accountpayable/{company}', [SupervisorController::class, 'category'])->name('apcompany');
     Route::get('/accountpayable/{company}/{category}', [SupervisorController::class, 'list'])->name('aplist');
-    // Route::get('/accountpayable/{company}/{category}/tambah', [SupervisorController::class, 'list'])->name('apadd');
     Route::get('/accountpayable/{company}/{category}/tambah', function () {
         return view('supervisor.apadd');
     })->name('apadd');
+    Route::get('/accountpayable/{name}/{category}/{id}', [SupervisorController::class, 'detail'])->name('apdetail');
 });
 
 // Route::get('/register', function () {

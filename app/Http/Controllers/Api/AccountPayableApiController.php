@@ -47,7 +47,7 @@ class AccountPayableApiController extends Controller
                 $purchase_item->quantity = $row['quantity'];
                 $purchase_item->subtotal = $row['subtotal'];
                 $purchase_item->tax = $row['tax'];
-                $purchase_item->price = $row['item'];
+                $purchase_item->price = $row['price'];
                 $purchase_item->item = $row['item'];
                 $purchase_item->purchase = $row['purchase'];
                 $purchase_item->timestamps = false;
@@ -111,7 +111,7 @@ class AccountPayableApiController extends Controller
                 $data_termin[0] = $termin->id;
             }
         }
-        
+
         if($request->has('payment')){
             $data['payment'] = $request->payment;
             if(is_array($data['payment'])){
@@ -151,5 +151,10 @@ class AccountPayableApiController extends Controller
 
         // Deliver
         return $this->response(['insert' => $data], NULL, 200);
+    }
+
+    public function delete(Request $request){
+        $purchase = Purchase::where('no', $request->id)->delete();
+        return $this->response(['data' => $request->id], NULL, 200);
     }
 }

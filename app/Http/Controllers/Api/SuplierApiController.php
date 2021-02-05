@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Suplier;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class SuplierApiController extends Controller
 {
     public function read(Request $request, $id = NULL){
         if(!is_null($id)){
-            $data = Suplier::where('id', $id)->with(['item', 'category'])->get();
+            $category = Category::whereRaw('LOWER(name) = "'.str_replace('-', ' ', $id).'"')->first();
+            $data = Suplier::where('category', $category->id)->with(['item', 'category'])->get();
         }else{
             $data = Suplier::with(['item', 'category'])->get();
         }

@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('vendors/css/tables/datatable/datatables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset('vendors/css/tables/datatable/extensions/dataTables.checkboxes.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset('vendors/css/tables/datatable/responsive.bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('vendors/css/extensions/sweetalert2.min.css') }}">
 @endsection
 
 @section('page-styles')
@@ -67,11 +68,13 @@
                                                 </td>
                                                 <td>
                                                     @isset($ap->Invoice)
-                                                        {{$ap->Invoice->no}}
+                                                    {{$ap->Invoice->no}}
                                                     @endisset
                                                 </td>
                                                 <td>
+                                                    @php($pid = 0)
                                                     @isset($ap->Purchase)
+                                                    @php($pid = $ap->Purchase->no)
                                                         {{$ap->Purchase->no}}
                                                     @endisset
                                                 </td>
@@ -99,9 +102,9 @@
                                                         <span class="bx bx-customize font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu"></span>
                                                         <div class="dropdown-menu dropdown-menu-right">
                                                             <a class="dropdown-item" href="javascript:void(0)"><i class="bx bx-printer mr-1"></i> cetak</a>
-                                                            {{-- <a class="dropdown-item" href="{{route('apdetail', ['name' => request()->segment(3), 'category' => request()->segment(4), 'id' => $row->id])}}"><i class="bx bx-target-lock mr-1"></i> detail</a> --}}
-                                                            <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-                                                            <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i> delete</a>
+                                                            <a class="dropdown-item" href="{{route('apdetail', ['name' => request()->segment(3), 'category' => request()->segment(4), 'id' => $ap->id])}}"><i class="bx bx-target-lock mr-1"></i> detail</a>
+                                                            {{-- <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a> --}}
+                                                            <a class="dropdown-item" href="javascript:void(0)" onclick="apdelete('{{$pid}}')"><i class="bx bx-trash mr-1"></i> delete</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -124,6 +127,7 @@
     <script src="{{asset('vendors/js/tables/datatable/datatables.checkboxes.min.js') }}"></script>
     <script src="{{asset('vendors/js/tables/datatable/dataTables.responsive.min.js') }}"></script>
     <script src="{{asset('vendors/js/tables/datatable/responsive.bootstrap.min.js') }}"></script>
+    <script src="{{asset('vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
 @endsection
 @section('page-scripts')
     <script src="{{asset('assets/js/supervisor/aplist.js')}}"></script>

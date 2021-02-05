@@ -34,13 +34,24 @@ class SupervisorController extends Controller
         }
     }
 
-    public function add($company = NULL, $category = NULL){
-
+    public function detail($company = NULL, $category = NULL, $id = NULL){
+        if(!is_null($company) && !is_null($category && !is_null($id))){
+            $data['company'] = Company::where('abbr', $company)->first();
+            $data['category'] = Category::whereRaw('LOWER(name) = "'.str_replace('-',' ', $category).'"')->first();
+            $data['ap'] = AccountPayable::where(['company' => $data['company']->id, 'category' => $data['category']->id, 'visible' => 1, 'id' => $id])->with(['purchase', 'invoice', 'category', 'suplier', 'company'])->get();
+            return view('supervisor.apdetail',['data' => $data]);
+        }
     }
 
     public function tes(){
         // $data = Invoice::with('termin')->get();
-        $data = Suplier::with(['item'])->get();
+        $data = AccountPayable::with(['purchase', 'invoice', 'category', 'suplier', 'company'])->get();
+        // echo "<pre>";
+        // var_dump($data);
+        // echo "</pre>";
+
+        // foreach ($data->purchase as $row) {
+        // }
         echo json_encode($data);
     }
 }

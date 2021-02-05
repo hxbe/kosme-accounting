@@ -195,3 +195,52 @@ $(document).ready(function () {
       })
     }
   });
+
+
+  function apdelete(id) {
+    Swal.fire({
+        title: 'Apakah anda yakin?',
+        text: "anda tidak dapat mengembalikan file yang terhapus!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Saya yakin!',
+        confirmButtonClass: 'btn btn-warning',
+        cancelButtonText: 'Tidak jadi',
+        cancelButtonClass: 'btn btn-danger ml-1',
+        buttonsStyling: false,
+      }).then(function (result) {
+        if (result.value) {
+            $.ajax({
+                url: assetBaseUrl+"api/supervisor/codewithmamangreget/accountpayable",
+                method: "delete",
+                data: {id:id},
+                success: function(res, message, code) {
+                    if(message == 'success'){
+                        Swal.fire({
+                            type: "success",
+                            title: 'Terhapus!',
+                            text: 'Data berhasil dihapus.',
+                            confirmButtonClass: 'btn btn-success',
+                          }).then( function () {
+                            var url = window.location.pathname;
+                            url = url.substring(1);
+                            window.location.replace(assetBaseUrl+url);
+                          })
+                    }else{
+                        alert(message);
+                    }
+                }
+            });
+        }
+        else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire({
+            title: 'Dibatalkan',
+            text: 'Data tidak jadi dihapus',
+            type: 'error',
+            confirmButtonClass: 'btn btn-success',
+          })
+        }
+      })
+  }

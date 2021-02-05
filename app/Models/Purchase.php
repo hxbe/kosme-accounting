@@ -21,7 +21,7 @@ class Purchase extends Model
      * @var array
      */
     protected $hidden = [
-        'no',
+        // 'no',
     ];
 
     public function invoice(){

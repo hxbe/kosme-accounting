@@ -42,10 +42,10 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'user', 'prefix' => 'supervisor/codewithmamangreget'], function () {
     Route::get('/suplier', [SuplierApiController::class, 'read']);
     Route::get('/suplier/{id}', [SuplierApiController::class, 'read']);
-    
+
     Route::get('/bank', [BankApiController::class, 'read']);
     Route::get('/bank/{id}', [BankApiController::class, 'read']);
-    
+
     Route::get('/company', [CompanyApiController::class, 'read']);
     Route::get('/company/{abbr}', [CompanyApiController::class, 'read']);
 
@@ -53,5 +53,6 @@ Route::group(['middleware' => 'user', 'prefix' => 'supervisor/codewithmamangrege
     Route::get('/category/{name}', [CategoryApiController::class, 'read']);
 
     Route::post('/accountpayable', [AccountPayableApiController::class, 'create']);
+    Route::delete('/accountpayable', [AccountPayableApiController::class, 'delete']);
     // Route::get('/accountpayable/{name}', [AccountPayableApiController::class, 'read']);
 });

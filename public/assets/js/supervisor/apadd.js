@@ -139,7 +139,7 @@ $.ajax({
 });
 
 $.ajax({
-    url: assetBaseUrl+"api/supervisor/codewithmamangreget/suplier",
+    url: assetBaseUrl+"api/supervisor/codewithmamangreget/suplier/"+ url[4],
     // dataType: 'application/json',
     success: function(res) {
         var results = [];
@@ -207,7 +207,7 @@ function initial_item() {
                 buttondown_class: "btn btn-primary",
                 buttonup_class: "btn btn-primary",
                 decimals:"2",
-                step:".01", 
+                step:".01",
                 max: 999999999999999999999999999999999999999999999999999999999,
                 prefix: 'Rp',
             });
@@ -215,7 +215,7 @@ function initial_item() {
                 buttondown_class: "btn btn-primary",
                 buttonup_class: "btn btn-primary",
                 decimals:"2",
-                step:".01", 
+                step:".01",
                 max: 999999999999999999999999999999999999999999999999999999999,
                 prefix: 'Rp',
             });
@@ -253,13 +253,13 @@ $('#item-tambah').on('click', function() {
         window.purchase_item[$("#item option:selected").index()].purchase = $("#pembelian").val();
         window.purchase_item[$("#item option:selected").index()].itemname = $("#item option:selected").text();
     }
-    
+
     $('#item').val('').change();
     $('#item-jumlah').val('');
     $('#item-harga').val('');
     $('#item-pajak').val('');
     $('#item-tambah').attr('disabled', 'disabled');
-    
+
     refresh_table_item();
 });
 
@@ -353,7 +353,7 @@ $("#termin-nominal").TouchSpin({
     buttondown_class: "btn btn-primary",
     buttonup_class: "btn btn-primary",
     decimals:"2",
-    step:".01", 
+    step:".01",
     max: 999999999999999999999999999999999999999999999999999999999,
     prefix: 'Rp',
 });
@@ -433,11 +433,11 @@ function refresh_table_termin(){
             $('#pembayaran-termin').on('change', function () {
                 $("#pembayaran-nominal-cash").val(window.termin[$('#pembayaran-termin option:selected').index()].value);
                 $("#pembayaran-nominal-transfer").val(window.termin[$('#pembayaran-termin option:selected').index()].value);
-            });  
+            });
         }else{
             $("#pembayaran-nominal-cash").val(window.termin[0].value);
             $("#pembayaran-nominal-transfer").val(window.termin[0].value);
-        }      
+        }
     }else{
         $('#pembayaran-tambah').attr('disabled', 'disabled');
         $("#termin-list").html('');
@@ -474,7 +474,7 @@ $("#pembayaran-nominal-cash").TouchSpin({
     buttondown_class: "btn btn-primary",
     buttonup_class: "btn btn-primary",
     decimals:"2",
-    step:".01", 
+    step:".01",
     max: 999999999999999999999999999999999999999999999999999999999,
     prefix: 'Rp',
 });
@@ -483,7 +483,7 @@ $("#pembayaran-nominal-transfer").TouchSpin({
     buttondown_class: "btn btn-primary",
     buttonup_class: "btn btn-primary",
     decimals:"2",
-    step:".01", 
+    step:".01",
     max: 999999999999999999999999999999999999999999999999999999999,
     prefix: 'Rp',
 });
@@ -505,7 +505,7 @@ $('#pembayaran-date').on('change', function() {
     window.temp.type = 'cash';
     if(Object.keys(window.termin).length > 1){
         $("#pembayaran-nominal-cash").val(window.termin[$('#pembayaran-termin option:selected').index()].value);
-        $("#pembayaran-nominal-transfer").val(window.termin[$('#pembayaran-termin option:selected').index()].value); 
+        $("#pembayaran-nominal-transfer").val(window.termin[$('#pembayaran-termin option:selected').index()].value);
     }else{
         $("#pembayaran-nominal-cash").val(window.termin[0].value);
         $("#pembayaran-nominal-transfer").val(window.termin[0].value);
